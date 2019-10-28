@@ -8,6 +8,7 @@ function SlideShow(root) {
 
     this.init = function() {
         this.slides = Array.prototype.slice.call(root.children);
+        this.slides.forEach(function(slide) {slide.classList.add('slide')})
         this.onAnimationEnd();
     }
 
@@ -22,7 +23,7 @@ function SlideShow(root) {
         this.index = ++this.index % this.slides.length;
 
         this.toShow = this.slides[this.index]
-        this.toShow.classList.add('visible', 'fromRight');
+        this.toShow.classList.add('fromRight', 'visible');
     }
 
     this.previousSlide = function(evt) {
@@ -36,7 +37,7 @@ function SlideShow(root) {
         this.index = --this.index < 0 ? this.slides.length - 1 : this.index;
 
         this.toShow = this.slides[this.index];
-        this.toShow.classList.add('visible', 'fromLeft');
+        this.toShow.classList.add('fromLeft', 'visible');
     }
 
     this.show = function(index) {
@@ -53,8 +54,8 @@ function SlideShow(root) {
     this.onAnimationEnd = function() {
         this.slides.forEach(function(slide) {
             slide.addEventListener(animationEnd, function() {
-                if (slide === this.toHide) slide.className = '';
-                if (slide === this.toShow) slide.className = 'visible';
+                if (slide === this.toHide) slide.className = 'slide';
+                if (slide === this.toShow) slide.className = 'slide visible';
                 this.clicked = false;
             }.bind(this))
         }.bind(this))
