@@ -41,14 +41,14 @@ function SlideShow(root) {
     }
 
     this.show = function(index) {
-        if (index === undefined) index = this.index;
-        this.slides[index].classList.add('visible')
+       if (index) this.index = index;
+        this.slides[this.index].classList.add('visible')
         this.clicked = false;
     }
     
     this.hide = function(index) {
-        if (index === undefined) index = this.index;
-        this.slides[index].classList.remove('visible')
+       if (index) this.index = index;
+        this.slides[this.index].classList.remove('visible')
     }
 
     this.onAnimationEnd = function() {
@@ -104,6 +104,3 @@ container.addEventListener('touchend', function(evt) {
     if (touch.end > touch.start + touch.minDistance) ss.previousSlide(evt);
     if (touch.end < touch.start - touch.minDistance) ss.nextSlide(evt);
 })
-
-
-
